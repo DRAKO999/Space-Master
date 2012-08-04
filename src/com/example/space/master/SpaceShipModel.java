@@ -38,10 +38,10 @@ public class SpaceShipModel {
 				   -0.3f, -0.3f, -0.3f, //bot left back
 				    0.3f, -0.3f, -0.3f, //bot right back
 				      0f,    0f, -0.3f, //bot top back
-				   -0.6f, -0.4f,    0f, //left wing end
-				   -0.6f, -0.4f, -0.3f,
-				    0.6f, -0.4f,    0f, //right wing end
-				    0.6f, -0.4f, -0.3f,  
+				   -0.6f, -0.45f,    0f, //left wing end
+				   -0.6f, -0.45f, -0.3f,
+				    0.6f, -0.45f,    0f, //right wing end
+				    0.6f, -0.45f, -0.3f,  
 				   
 		};
 	    noOfVertices = coords.length;
@@ -109,34 +109,66 @@ public class SpaceShipModel {
 	
 	public void setPosition(float x, float y, float z) {
 		
-		posX += x;
 		posY += y;
 		posZ += z;
+		
+		if(x>0) {
+			
+			if(posX < 1.2f)
+				posX +=x;
+			
+		} else {
+			
+			if(posX > -1.2f)
+				posX +=x;
+			
+		}
 		
 	}
 	
 	public void setRotationVector(float x, float y, float z) {
+	
 		vectorX = x;
 		vectorY = y;
 		vectorZ = z;
+	
 	}
 	
 	public void setRotationAngle(float angle) {
 		
-		vectorAngle += angle;
+		if(angle > 0) {
+			
+			if(vectorAngle < 40 )
+				vectorAngle += angle;
+			
+		} else
+		{
+			if(vectorAngle > -40 )
+				vectorAngle += angle;
+		}
 		
 	}
 	
-	public void drawSpaceShipMode(GL10 gl) {
+	public void drawSpaceShipModel(GL10 gl) {
 
 	    // define the color we want to be displayed as the "clipping wall"
-		gl.glLoadIdentity();
-	    gl.glTranslatef(posX, posY, posZ);
-	    gl.glRotatef(vectorAngle, vectorX, vectorY, vectorZ);
-	    gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
+		gl.glEnableClientState(gl.GL_COLOR_ARRAY);
+		gl.glVertexPointer(3, GL10.GL_FLOAT, 0, vertexBuffer);
 	    gl.glColorPointer(4, GL10.GL_FLOAT, 0, colorBuffer);
+	    gl.glLoadIdentity();
+	    gl.glTranslatef(posX, posY, posZ);
+	    gl.glRotatef(30, 1f, 0f, 0f);
+	    gl.glRotatef(vectorAngle, vectorX, vectorY, vectorZ);
 	    gl.glDrawElements(GL10.GL_TRIANGLES, indices.length , GL10.GL_UNSIGNED_SHORT, indexBuffer);
-
+	    gl.glDisableClientState(gl.GL_COLOR_ARRAY);
+	}
+	
+	public float [] getPosition() {
+		
+		float [] pos = { posX, posY, posZ };
+		
+		return pos;
+		
 	}
 	
 }
