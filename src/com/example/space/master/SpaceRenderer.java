@@ -46,10 +46,14 @@ public class SpaceRenderer implements GLSurfaceView.Renderer {
 	
 	public void fireLaserBeam() {
 		
-		LaserBeam newBeam = new LaserBeam();
-		newBeam.initLaserBeam();
-		newBeam.setPosition(starShip.getPosition()[0],starShip.getPosition()[1],starShip.getPosition()[2]);
-		beam.add(newBeam);
+		LaserBeam newBeam1 = new LaserBeam();
+		LaserBeam newBeam2 = new LaserBeam();
+		newBeam1.initLaserBeam();
+		newBeam1.setPosition(starShip.getPosition()[0],starShip.getPosition()[1],starShip.getPosition()[2]-0.1f);
+		beam.add(newBeam1);
+		newBeam2.initLaserBeam();
+		newBeam2.setPosition(starShip.getPosition()[0]+0.2f,starShip.getPosition()[1],starShip.getPosition()[2]-0.1f);
+		beam.add(newBeam2);
 		System.out.println("fired");
 	}
 	
@@ -66,7 +70,7 @@ public class SpaceRenderer implements GLSurfaceView.Renderer {
         gl.glMatrixMode(GL10.GL_PROJECTION);
         float size = .01f * (float) Math.tan(Math.toRadians(45.0) / 2); 
         float ratio = width / height;
-        gl.glFrustumf(-size, size, -size / ratio, size / ratio, 0.007f, 100.0f);
+        gl.glFrustumf(-size, size, -size / ratio, size / ratio/5, 0.007f, 100.0f);
         gl.glViewport(0, 0, (int) width, (int) height);
         gl.glMatrixMode(GL10.GL_MODELVIEW);
         gl.glEnable(GL10.GL_DEPTH_TEST);
@@ -77,7 +81,7 @@ public class SpaceRenderer implements GLSurfaceView.Renderer {
 	    gl.glEnableClientState(GL10.GL_VERTEX_ARRAY);
 	    starShip.initSpaceShipModel();
 	    starShip.setRotationVector(0f, 0f, 1f);
-		starShip.setPosition(0f, -1f, -2f);
+		starShip.setPosition(0f, -1.2f, -1.5f);
 
 	}
 

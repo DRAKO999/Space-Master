@@ -32,16 +32,16 @@ public class SpaceShipModel {
 		
 		float[] coords = {
 	    
-				   -0.3f, -0.3f,    0f, //bot left front
-					0.3f, -0.3f,    0f, //bot right front
+				   -0.2f, -0.2f,    0f, //bot left front
+					0.2f, -0.2f,    0f, //bot right front
 					  0f,    0f,    0f, //bot top front
-				   -0.3f, -0.3f, -0.3f, //bot left back
-				    0.3f, -0.3f, -0.3f, //bot right back
-				      0f,    0f, -0.3f, //bot top back
-				   -0.6f, -0.45f,    0f, //left wing end
-				   -0.6f, -0.45f, -0.3f,
-				    0.6f, -0.45f,    0f, //right wing end
-				    0.6f, -0.45f, -0.3f,  
+				   -0.2f, -0.2f, -0.2f, //bot left back
+				    0.2f, -0.2f, -0.2f, //bot right back
+				      0f,    0f, -0.2f, //bot top back
+				   -0.4f, -0.3f,    0f, //left wing end
+				   -0.4f, -0.3f, -0.2f,
+				    0.4f, -0.3f,    0f, //right wing end
+				    0.4f, -0.3f, -0.2f,  
 				   
 		};
 	    noOfVertices = coords.length;
@@ -138,12 +138,12 @@ public class SpaceShipModel {
 		
 		if(angle > 0) {
 			
-			if(vectorAngle < 40 )
+			if(vectorAngle < 30 )
 				vectorAngle += angle;
 			
 		} else
 		{
-			if(vectorAngle > -40 )
+			if(vectorAngle > -30 )
 				vectorAngle += angle;
 		}
 		
@@ -157,7 +157,7 @@ public class SpaceShipModel {
 	    gl.glColorPointer(4, GL10.GL_FLOAT, 0, colorBuffer);
 	    gl.glLoadIdentity();
 	    gl.glTranslatef(posX, posY, posZ);
-	    gl.glRotatef(30, 1f, 0f, 0f);
+	    gl.glRotatef(15, 1f, 0f, 0f);
 	    gl.glRotatef(vectorAngle, vectorX, vectorY, vectorZ);
 	    gl.glDrawElements(GL10.GL_TRIANGLES, indices.length , GL10.GL_UNSIGNED_SHORT, indexBuffer);
 	    gl.glDisableClientState(gl.GL_COLOR_ARRAY);
